@@ -73,17 +73,18 @@
 	<body>
 		<input id="passarea" type="password" style="width:100%; border:none;"/>
 		<div style="display: flex; justify-content: space-around; list-style: none;">
-		<table style="flex: 0 1 max-content; aspect-ratio: 1 / 1;" cellspacing="0">
+		<table style="flex: 0 1 max-content;" cellspacing="0">
 			<?php
-				for ($y=0; $y<$gridsize+1; $y++) {
-					echo "<tr>";
-					for ($x=0; $x<$gridsize+1; $x++) {
-						if ($x+$y == 0) echo "<td> </td>";
-						else if ($y == 0) echo "<td scope=\"col\">", str_pad(dechex($x-1), 2, "0", STR_PAD_LEFT), "</td>";
-						else if ($x == 0) echo "<td scope=\"row\">", str_pad(dechex($y-1), 2, "0", STR_PAD_LEFT), "</td>";
+				for ($y=0; $y<$gridsize+2; $y++) {
+					for ($x=0; $x<$gridsize+2; $x++) {
+						if ($x+$y == 0 || $x+$y == $gridsize+2 || $x+$y == ($gridsize+2)*2)
+
+						else if ($y == 0 || $y == $gridsize+2)
+							echo "<td scope=\"col\">", str_pad(dechex($x-1), 2, "0", STR_PAD_LEFT), "</td>";
+						else if ($x == 0 || $y == $gridsize+2)
+							echo "<td scope=\"row\">", str_pad(dechex($y-1), 2, "0", STR_PAD_LEFT), "</td>";
 						else echo "<td class=\"passchar\">", htmlentities($chars[$y*$gridsize+1+$x]), "</td>";
 					}
-					echo "</tr>";
 				}
 			?>
 		</table>
